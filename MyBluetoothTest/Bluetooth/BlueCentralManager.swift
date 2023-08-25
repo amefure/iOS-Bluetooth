@@ -48,6 +48,10 @@ class BlueCentralManager: NSObject, ObservableObject {
     private var indicateCharacteristic: CBCharacteristic!
     // MARK: - ペリフェラル側の実装に合わせて定義する
     
+    // 再接続用
+    private let userDefaults = UserDefaults.standard
+    private let userDefaultsKey = "ConnectPeripheral"
+    
     override init() {
         super.init()
         // ① インスタンスの格納
@@ -57,8 +61,23 @@ class BlueCentralManager: NSObject, ObservableObject {
     // ②：スキャンの実装
     public func startScan() {
         if centralManager.state == .poweredOn {
+            // 接続したことがあるかどうか
+            if connectPeripheral != nil {
+                if let uuidStr = userDefaults.string(forKey: userDefaultsKey) {
+                    if let uuid = UUID(uuidString: uuidStr) {
+                        let peripherals = centralManager.retrievePeripherals(withIdentifiers: [uuid])
+                        if peripherals.count != 0 {
+                            // 再接続
+                            log.append("接続済みのペリフェラルに再接続\n")
+                            centralManager.connect(peripherals.first!)
+                            return
+                        }
+                    }
+                }
+            }
             log.append("スキャン開始\n")
             centralManager.scanForPeripherals(withServices: nil, options: nil)
+            
         }
     }
     
@@ -141,6 +160,11 @@ extension BlueCentralManager: CBCentralManagerDelegate {
         log.append("接続成功\n")
         // ⑤：サービス/キャラクタリスティックの取得
         peripheral.delegate = self
+        
+        // 接続したペリフェラルのUUIDをローカルに保存
+        let uuidStr = peripheral.identifier.uuidString
+        userDefaults.set(uuidStr, forKey: userDefaultsKey)
+        
         // サービスの探索開始
         let services = [serviceUUID]
         peripheral.discoverServices(services) // nilを渡すことも可能だが電池消費が激しい
