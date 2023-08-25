@@ -8,14 +8,99 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var blueCentralManager = BlueCentralManager.shared
+    @ObservedObject var bluePeripheralManager = BluePeripheralManager.shared
+    
+    @State var select = 0
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $select) {
+            // MARK : - Central
+            VStack{
+                TextEditor(text: $blueCentralManager.log)
+                
+                Divider()
+                
+                HStack{
+                    Button {
+                        blueCentralManager.observeNotify()
+                    } label: {
+                        Text("Notify検知開始")
+                    }
+                    
+                    Button {
+                        blueCentralManager.stopNotify()
+                    } label: {
+                        Text("Notify検知停止")
+                    }
+                }
+                
+                Button {
+                    blueCentralManager.readData()
+                } label: {
+                    Text("読み込み")
+                }.padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                
+                Button {
+                    blueCentralManager.registerData()
+                } label: {
+                    Text("書き込み")
+                }.padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                
+                Button {
+                    blueCentralManager.startScan()
+                } label: {
+                    Text("スキャン開始")
+                }.padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+            }.tabItem{
+                Text("Central")
+            }.tag(1)
+            
+            // MARK : - Peripheral
+            VStack{
+                TextEditor(text: $bluePeripheralManager.log)
+                
+                Divider()
+                
+                Button {
+                    bluePeripheralManager.sendNotify()
+                } label: {
+                    Text("Notify通知")
+                }.padding()
+                    .background(Color.cyan)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                
+                Button {
+                    bluePeripheralManager.stopAdvertising()
+                } label: {
+                    Text("アドバタイズ停止")
+                }.padding()
+                    .background(Color.cyan)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                
+                Button {
+                    bluePeripheralManager.startAdvertising()
+                } label: {
+                    Text("アドバタイズ開始")
+                }.padding()
+                    .background(Color.cyan)
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+            }.tabItem{
+                Text("Peripheral")
+            }.tag(2)
+            
         }
-        .padding()
     }
 }
 

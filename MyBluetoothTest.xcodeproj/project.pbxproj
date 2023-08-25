@@ -11,6 +11,8 @@
 		12F6439B2A96191B00B0A40E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F6439A2A96191B00B0A40E /* ContentView.swift */; };
 		12F6439D2A96191D00B0A40E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12F6439C2A96191D00B0A40E /* Assets.xcassets */; };
 		12F643A02A96191D00B0A40E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12F6439F2A96191D00B0A40E /* Preview Assets.xcassets */; };
+		12F643A82A96196A00B0A40E /* BlueCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F643A72A96196A00B0A40E /* BlueCentralManager.swift */; };
+		12F643AB2A97211200B0A40E /* BluePeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F643AA2A97211200B0A40E /* BluePeripheralManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,9 @@
 		12F6439A2A96191B00B0A40E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		12F6439C2A96191D00B0A40E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12F6439F2A96191D00B0A40E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		12F643A72A96196A00B0A40E /* BlueCentralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueCentralManager.swift; sourceTree = "<group>"; };
+		12F643A92A9619A100B0A40E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		12F643AA2A97211200B0A40E /* BluePeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluePeripheralManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +56,10 @@
 		12F643972A96191B00B0A40E /* MyBluetoothTest */ = {
 			isa = PBXGroup;
 			children = (
+				12F643A92A9619A100B0A40E /* Info.plist */,
 				12F643982A96191B00B0A40E /* MyBluetoothTestApp.swift */,
 				12F6439A2A96191B00B0A40E /* ContentView.swift */,
+				12F643A62A96192B00B0A40E /* Bluetooth */,
 				12F6439C2A96191D00B0A40E /* Assets.xcassets */,
 				12F6439E2A96191D00B0A40E /* Preview Content */,
 			);
@@ -65,6 +72,15 @@
 				12F6439F2A96191D00B0A40E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		12F643A62A96192B00B0A40E /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				12F643A72A96196A00B0A40E /* BlueCentralManager.swift */,
+				12F643AA2A97211200B0A40E /* BluePeripheralManager.swift */,
+			);
+			path = Bluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +153,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12F643A82A96196A00B0A40E /* BlueCentralManager.swift in Sources */,
+				12F643AB2A97211200B0A40E /* BluePeripheralManager.swift in Sources */,
 				12F6439B2A96191B00B0A40E /* ContentView.swift in Sources */,
 				12F643992A96191B00B0A40E /* MyBluetoothTestApp.swift in Sources */,
 			);
@@ -270,6 +288,8 @@
 				DEVELOPMENT_TEAM = CGD79LB65H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBluetoothTest/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "アプリ内でBluetooth機能を使用するため";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +319,8 @@
 				DEVELOPMENT_TEAM = CGD79LB65H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyBluetoothTest/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "アプリ内でBluetooth機能を使用するため";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
