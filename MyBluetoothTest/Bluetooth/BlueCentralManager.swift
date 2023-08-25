@@ -83,6 +83,13 @@ class BlueCentralManager: NSObject, ObservableObject {
             connectPeripheral.setNotifyValue(false, for: notifyCharacteristic)
         }
     }
+    
+    // ペリフェラルとの接続を切断する
+    public func disConnect() {
+        if connectPeripheral != nil {
+            centralManager.cancelPeripheralConnection(connectPeripheral)
+        }
+    }
 }
 
 // ① CBCentralManagerDelegateへの準拠
@@ -205,5 +212,10 @@ extension BlueCentralManager: CBPeripheralDelegate {
     // ⑦ 書き込み成功時に呼ばれる
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         log.append("書き込み成功\n")
+    }
+    
+    // ペリフェラルからの切断
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        log.append("ペリフェラルから切断されました。\n")
     }
 }

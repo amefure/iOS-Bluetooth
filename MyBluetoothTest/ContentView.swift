@@ -25,41 +25,70 @@ struct ContentView: View {
                         blueCentralManager.observeNotify()
                     } label: {
                         Text("Notify検知開始")
-                    }
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
                     
                     Button {
                         blueCentralManager.stopNotify()
                     } label: {
                         Text("Notify検知停止")
-                    }
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
                 }
                 
-                Button {
-                    blueCentralManager.readData()
-                } label: {
-                    Text("読み込み")
-                }.padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
+                HStack{
+                    
+                    
+                    Button {
+                        blueCentralManager.readData()
+                    } label: {
+                        Text("読み込み")
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                        
+                    
+                    Button {
+                        blueCentralManager.registerData()
+                    } label: {
+                        Text("書き込み")
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                        
+                }
+                HStack{
+                    Button {
+                        blueCentralManager.startScan()
+                    } label: {
+                        Text("スキャン")
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                    
+                    Button {
+                        blueCentralManager.startScan()
+                    } label: {
+                        Text("切断")
+                    }.padding()
+                        .frame(width:150)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                }
                 
-                Button {
-                    blueCentralManager.registerData()
-                } label: {
-                    Text("書き込み")
-                }.padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
-                
-                Button {
-                    blueCentralManager.startScan()
-                } label: {
-                    Text("スキャン開始")
-                }.padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(20)
             }.tabItem{
                 Text("Central")
             }.tag(1)
