@@ -29,8 +29,6 @@ class BluePeripheralManager: NSObject, ObservableObject {
         super.init()
         // ① インスタンスの格納
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
-        // ②：サービス/キャラクタリスティックを追加する
-        addService()
     }
     
     // サービス用のUUID
@@ -39,7 +37,7 @@ class BluePeripheralManager: NSObject, ObservableObject {
     // キャラクタリスティック用のUUID
     private let readCharacteristicUUID = CBUUID(string:"00000000-1111-1111-1111-111111111111")
     private let writeCharacteristicUUID = CBUUID(string:"00000000-2222-1111-1111-111111111111")
-    private let writeWithoutResponseCharacteristicUUID = CBUUID(string:"00000000-2222-2222-1111-111111111111")
+//    private let writeWithoutResponseCharacteristicUUID = CBUUID(string:"00000000-2222-2222-1111-111111111111")
     private let notifyCharacteristicUUID = CBUUID(string:"00000000-3333-1111-1111-111111111111")
     private let indicateCharacteristicUUID = CBUUID(string:"00000000-4444-1111-1111-111111111111")
     
@@ -131,6 +129,8 @@ extension BluePeripheralManager: CBPeripheralManagerDelegate {
             // 電源がON
             // Bluetooth接続が開始できるようになります
             log.append("poweredOn\n")
+            // ②：サービス/キャラクタリスティックを追加する
+            addService()
         @unknown default:
             log.append("default\n")
         }
